@@ -1,10 +1,82 @@
-﻿@model IEnumerable<Models.Responses.CurseResponse>
+﻿@using Logic
+@model IEnumerable<Models.Responses.CurseResponse>
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Курсы валют";
 }
 
+<style>
+    .dropdown{
+    display: inline-block;
+    }
+</style>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h2 class="mt-5">Курсы валют</h2>
+</div>
+
+<div class="container mt-3">
+    <div class="justify-content-start align-items-center">
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Валюты
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach (var item in typeof(DropDownSelectEnum).GetDescriptions().Select(a => a))
+                {
+                    <a class="dropdown-item" asp-action="Index" asp-route-keyCurse="@item"> @Html.DisplayFor(modelItem => item)</a>
+                }
+            </div>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <table style="margin-top: 20px" class="table table-hover table-bordered">
+                <thead style="background: #eeeeee">
+                <tr>
+                    <th scope="col">Код бумаги</th>
+                    <th scope="col">Период агрегации</th>
+                    <th scope="col">Максимальное значение</th>
+                    <th scope="col">Минимальное значение</th>
+                    <th scope="col">Первое значение</th>
+                    <th scope="col">Посленее значение</th>
+                </tr>
+                </thead>
+                @foreach (var response in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => response.Key)
+                        </td>
+                        <td>
+                            @{
+                                var value = response.PeriodEnum.DescriptionAttr();
+                            }
+                            @Html.DisplayFor(modelItem => value)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => response.MaxValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => response.MinValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => response.FirstValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => response.LastValue)
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        else
+        {
+            
+            <div style="display: inline">
+                <h4>Данных нет@(Model is null || !Model.Any() ? ", выберите валюту" : "")</h4>
+            </div>
+        }
+    </div>
 </div>

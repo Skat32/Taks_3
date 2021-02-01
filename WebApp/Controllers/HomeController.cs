@@ -21,9 +21,12 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Index(string keyCurse)
         {
-            var (from, to) = keyCurse.ParseStr();
+            if (string.IsNullOrEmpty(keyCurse))
+                return View();
             
-            return View(await _currencyService.GetCursesAsync(new CurseRequest{From = from, To = to}));
+            var (from, to) = keyCurse.ParseCurrencies();
+
+            return View(await _currencyService.GetCursesAsync(new CurseRequest {From = from, To = to}));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

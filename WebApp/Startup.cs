@@ -29,7 +29,6 @@ namespace WebApp
                 opt.UseNpgsql(_configuration.GetConnectionString("HomeContext")));
             
             services.AddScoped<IHttpClientProxy, HttpClientProxy>();
-            services.AddScoped<ICurrencyConverterService, CurrencyConverterService>();
             services.AddScoped<ICurrencyService, CurrencyConverterService>();
 
             services.AddSingleton<ILoggerService, LoggerService>();

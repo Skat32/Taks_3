@@ -21,6 +21,6 @@ namespace Logic.Interfaces
         /// </summary>
         /// <param name="requests"></param>
         /// <returns></returns>
-        Task SaveCursesAsync(IEnumerable<CurseRequest> requests);
+        Task SaveCursesAsync(IList<CurseRequest> requests);
     }
 }

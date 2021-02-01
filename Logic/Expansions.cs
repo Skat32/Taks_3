@@ -74,7 +74,7 @@ namespace Logic
             return $"{request.CurrenciesFrom.DescriptionAttr()}_{request.CurrenciesTo.DescriptionAttr()}";
         }
 
-        public static (CurrenciesEnum from, CurrenciesEnum to) ParseStr(this string responseKey)
+        public static (CurrenciesEnum from, CurrenciesEnum to) ParseCurrencies(this string responseKey)
         {
             var result = responseKey.Split('_');
 

@@ -24,7 +24,7 @@ namespace WorkerService
             _currencyConverterService = scope.ServiceProvider.GetRequiredService<ICurrencyConverterService>();
             _loggerService = scope.ServiceProvider.GetRequiredService<ILoggerService>();
             
-            _countMinutes = int.Parse(scope.ServiceProvider.GetRequiredService<IConfiguration>().GetSection("TimeInMinutes").Value);
+            _countMinutes = int.Parse(scope.ServiceProvider.GetRequiredService<IConfiguration>().GetSection("TimeInMinutes").Value) * 60;
             
             if (_countMinutes == 0) _countMinutes = 1;
         }
@@ -39,8 +39,8 @@ namespace WorkerService
                 {
                     await _currencyConverterService.SaveCursesAsync(new List<CurseRequest>
                     {
-                        new CurseRequest {From = CurrenciesEnum.Usd, To = CurrenciesEnum.Rub},
-                        new CurseRequest {From = CurrenciesEnum.Eur, To = CurrenciesEnum.Rub}
+                        new() {From = CurrenciesEnum.USD, To = CurrenciesEnum.RUB},
+                        new() {From = CurrenciesEnum.EUR, To = CurrenciesEnum.RUB}
                     });
                 }
                 catch (Exception e)

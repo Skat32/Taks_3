@@ -5,12 +5,12 @@ namespace Models.Enums
     public enum CurrenciesEnum
     {
         [Description("RUB")]
-        Rub = 1,
+        RUB = 1,
         
         [Description("EUR")]
-        Eur = 2,
+        EUR = 2,
         
         [Description("USD")]
-        Usd = 3
+        USD = 3
     }
 }
