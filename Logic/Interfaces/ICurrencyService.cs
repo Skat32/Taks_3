@@ -15,6 +15,6 @@ namespace Logic.Interfaces
         /// </summary>
         /// <param name="request"> валюты </param>
         /// <returns></returns>
-        Task<IEnumerable<CurseResponse>> GetCursesAsync(CurseRequest request);
+        Task<IList<CurseResponse>> GetCursesAsync(CurseRequest request);
     }
 }

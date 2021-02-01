@@ -68,7 +68,7 @@ namespace Logic.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<CurseResponse>> GetCursesAsync(CurseRequest request)
+        public async Task<IList<CurseResponse>> GetCursesAsync(CurseRequest request)
         {
             var cursesDb = await _context.Curses.Where(x => x.Created >= DateTime.Now.AddHours(-1)).ToListAsync();
 
