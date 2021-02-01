@@ -21,7 +21,7 @@ namespace WorkerService
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddDbContext<HomeContext>(opt =>
-                        opt.UseNpgsql(hostContext.Configuration.GetConnectionString("HomeContext")), ServiceLifetime.Singleton);
+                        opt.UseSqlServer(hostContext.Configuration.GetConnectionString("HomeContext")), ServiceLifetime.Singleton);
                     
                     services.AddSingleton(hostContext.Configuration.GetSection(nameof(CurrencyConverterApi)).Get<CurrencyConverterApi>());
                     

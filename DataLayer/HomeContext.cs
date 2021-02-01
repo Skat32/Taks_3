@@ -26,9 +26,7 @@ namespace DataLayer
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (_connectionString != null)
-            {
-                optionsBuilder.UseNpgsql(_connectionString);
-            }
+                optionsBuilder.UseSqlServer(_connectionString);
         }
         
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = new CancellationToken())
@@ -76,9 +74,7 @@ namespace DataLayer
                 entityEntry.Property("Modified").CurrentValue = DateTime.Now;
 
                 if (entityEntry.State == EntityState.Added)
-                {
                     entityEntry.Property("Created").CurrentValue = DateTime.Now;
-                }
             }
         }
 

@@ -26,7 +26,7 @@ namespace WebApp
             services.AddSingleton(_configuration.GetSection(nameof(CurrencyConverterApi)).Get<CurrencyConverterApi>());
 
             services.AddDbContext<HomeContext>(opt =>
-                opt.UseNpgsql(_configuration.GetConnectionString("HomeContext")));
+                opt.UseSqlServer(_configuration.GetConnectionString("HomeContext")));
             
             services.AddScoped<IHttpClientProxy, HttpClientProxy>();
             services.AddScoped<ICurrencyService, CurrencyConverterService>();
